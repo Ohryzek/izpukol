@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>motivation keeps you up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'Wonder';
+            src: url('data:application/octet-stream;base64,AAEAAAALAIAAAwAwT1MvMg8DBPAAAAA8AAAAYGNtYXABvADPAAABWAAAAExnbHlmF6sO8gAAAcAAABlgaGVhZBR0HnwAAAA4AAAANmhoZWEIpAP/AAAAPAAAAA5obXR4FfoAAAAAAVgAAABYbG9jYQGsAfQAAAFQAAAALm1heHABlQ==');
+            font-weight: normal;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&family=Permanent+Marker&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0f3f 25%, #2d1b4e 50%, #1a0f3f 75%, #0a0e27 100%);
+            background-attachment: fixed;
+            font-family: 'Fredoka', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background elements */
+        .background-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #ff00ff 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #00ffff 0%, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: 5s;
+        }
+
+        .orb3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #ffff00 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            font-family: 'Permanent Marker', cursive;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #00ffff;
+            margin-top: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Level Up Progress */
+        .level-up-section {
+            background: rgba(255, 0, 255, 0.1);
+            border: 3px solid #ff00ff;
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.8s ease-out 0.2s both;
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.3), inset 0 0 40px rgba(255, 0, 255, 0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .level-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Permanent Marker', cursive;
+            color: #ffff00;
+            text-shadow: 2px 2px 0px rgba(255, 0, 255, 0.8);
+        }
+
+        .level-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-right: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+        }
+
+        .progress-container {
+            margin-top: 30px;
+        }
+
+        .progress-label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-percentage {
+            background: linear-gradient(90deg, #00ffff, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00);
+            animation: fillProgress 2s ease-out, glow 2s ease-out;
+            border-radius: 18px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0%; }
+            to { width: 68%; }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 255, 1); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Daily Quests */
+        .quests-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-family: 'Permanent Marker', cursive;
+            color: #00ffff;
+            text-shadow: 2px 2px 0px rgba(0, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-emoji {
+            font-size: 2.5rem;
+        }
+
+        .quest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .quest-card {
+            background: rgba(0, 255, 255, 0.08);
+            border: 3px solid #00ffff;
+            border-radius: 25px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: slideUp 0.8s ease-out both;
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quest-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .quest-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .quest-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: #ffff00;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.5), 0 0 40px rgba(255, 255, 0, 0.4);
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        .quest-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 0, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .quest-card:hover::before {
+            opacity: 1;
+        }
+
+        .quest-emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .quest-card:hover .quest-emoji {
+            animation: bounce 0.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .quest-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffff00;
+        }
+
+        .quest-description {
+            font-size: 0.95rem;
+            color: #b0e0ff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .quest-reward {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #ff00ff;
+            font-size: 1rem;
+        }
+
+        .reward-star {
+            font-size: 1.2rem;
+        }
+
+        /* Floating Islands */
+        .floating-islands {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .island {
+            perspective: 1000px;
+            animation: slideUp 0.8s ease-out both;
+        }
+
+        .island:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .island:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .island:nth-child(4) {
+            animation-delay: 0.45s;
+        }
+
+        .island-content {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.15), rgba(0, 255, 255, 0.15));
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #ff00ff, #00ffff) 1;
+            border-radius: 40px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .island-content:hover {
+            transform: translateY(-25px) rotateX(5deg);
+            box-shadow: 0 30px 80px rgba(255, 0, 255, 0.4);
+            border-image: linear-gradient(135deg, #ffff00, #ff00ff, #00ffff) 1;
+        }
+
+        .island-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .island-content:hover .island-icon {
+            animation: float 1s ease-in-out infinite;
+        }
+
+        .island-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffff00;
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        .island-description {
+            font-size: 0.9rem;
+            color: #b0e0ff;
+            margin-bottom: 15px;
+        }
+
+        .island-stat {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Motivational Quote */
+        .quote-section {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border: 3px dashed #00ffff;
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideUp 0.8s ease-out 0.3s both;
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .quote-mark {
+            font-size: 3rem;
+            color: #ff00ff;
+            opacity: 0.6;
+            margin-bottom: 15px;
+        }
+
+        .quote-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #ffff00;
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #00ffff;
+            font-weight: 300;
+        }
+
+        /* Action Button */
+        .action-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            color: #000000;
+            padding: 18px 50px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 40px rgba(255, 0, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Fredoka', sans-serif;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .action-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .action-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 60px rgba(255, 0, 255, 0.8);
+        }
+
+        .action-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #b0e0ff;
+            font-size: 0.9rem;
+            margin-top: 60px;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        .footer-stars {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .logo {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .level-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .quest-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Interactive checkbox animation */
+        .quest-card input[type="checkbox"] {
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.3s;
+        }
+
+        .quest-card input[type="checkbox"]:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+
+        .quest-card input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            border-color: #ffff00;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+        }
+
+        .quest-card input[type="checkbox"]:checked::after {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animated Orbs -->
+    <div class="background-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="logo">✨ WONDER DISCIPLINE ✨</h1>
+            <p class="subtitle">Transform Your Productivity Into Magic</p>
+        </div>
+
+        <!-- Level Up Your Discipline -->
+        <div class="level-up-section">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <span class="level-number">LEVEL 15</span>
+                <div class="level-title">Level Up Your Discipline!</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Discipline XP Progress</span>
+                    <span class="progress-percentage">68%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Quests Section -->
+        <div class="quests-section">
+            <h2 class="section-title">
+                <span class="icon-emoji">⚔️</span>
+                Daily Quests
+            </h2>
+            <div class="quest-grid">
+                <div class="quest-card">
+                    <span class="quest-emoji">📚</span>
+                    <h3 class="quest-title">Study Sprint</h3>
+                    <p class="quest-description">Complete 45 minutes of focused study time without distractions</p>
+                    <div class="quest-reward">
+                        <span class="reward-star">⭐</span>
+                        <span>100 XP</span>
+                    </div>
+                    <button class="action-button"><span>Start Quest</span></button>
+                </div>
+
+                <div class="quest-card">
+                    <span class="quest-emoji">💪</span>
+                    <h3 class="quest-title">Move Your Body</h3>
+                    <p class="quest-description">Exercise for 30 minutes - walk, run, or workout</p>
+                    <div class="quest-reward">
+                        <span class="reward-star">⭐</span>
+                        <span>75 XP</span>
+                    </div>
+                    <button class="action-button"><span>Start Quest</span></button>
+                </div>
+
+                <div class="quest-card">
+                    <span class="quest-emoji">🎯</span>
+                    <h3 class="quest-title">Goal Crusher</h3>
+                    <p class="quest-description">Complete your top priority task before noon</p>
+                    <div class="quest-reward">
+                        <span class="reward-star">⭐</span>
+                        <span>150 XP</span>
+                    </div>
+                    <button class="action-button"><span>Start Quest</span></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Islands Section -->
+        <div>
+            <h2 class="section-title">
+                <span class="icon-emoji">🏝️</span>
+                Achievement Islands
+            </h2>
+            <div class="floating-islands">
+                <div class="island">
+                    <div class="island-content">
+                        <span class="island-icon">🔥</span>
+                        <h3 class="island-title">Streaks</h3>
+                        <p class="island-description">Your current streak</p>
+                        <div class="island-stat">42 Days</div>
+                    </div>
+                </div>
+
+                <div class="island">
+                    <div class="island-content">
+                        <span class="island-icon">💎</span>
+                        <h3 class="island-title">Total Points</h3>
+                        <p class="island-description">Collected this week</p>
+                        <div class="island-stat">4,250 XP</div>
+                    </div>
+                </div>
+
+                <div class="island">
+                    <div class="island-content">
+                        <span class="island-icon">🏆</span>
+                        <h3 class="island-title">Rank</h3>
+                        <p class="island-description">Your current standing</p>
+                        <div class="island-stat">#12</div>
+                    </div>
+                </div>
+
+                <div class="island">
+                    <div class="island-content">
+                        <span class="island-icon">🌟</span>
+                        <h3 class="island-title">Milestones</h3>
+                        <p class="island-description">Achievements unlocked</p>
+                        <div class="island-stat">23</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Motivational Quote -->
+        <div class="quote-section">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">The only way to do great work is to love what you do. Stop procrastinating and start leveling up today!</p>
+            <p class="quote-author">— Your Future Self</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-stars">✨ 🌟 ✨</div>
+            <p>Keep the Wonder alive! Every task completed is a step towards your legendary journey.</p>
+            <p style="margin-top: 20px; opacity: 0.7;">© 2026 Wonder Discipline | Transform Procrastination into Progress</p>
+        </div>
+    </div>
+
+    <script>
+        // Interactive elements
+        document.querySelectorAll('.quest-card, .island-content').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 100);
+            });
+        });
+
+        // Progress bar animation on load
+        window.addEventListener('load', () => {
+            const progressBar = document.querySelector('.progress-bar-fill');
+            if (progressBar) {
+                progressBar.style.animation = 'fillProgress 2.5s ease-out forwards, glow 2.5s ease-out forwards';
+            }
+        });
+
+        // Button interactions
+        document.querySelectorAll('.action-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const ripple = document.createElement('span');
+                const rect = button.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 50%;
+                    left: ${x}px;
+                    top: ${y}px;
+                    pointer-events: none;
+                    animation: ripple 0.6s ease-out;
+                `;
+                button.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                from {
+                    opacity: 1;
+                    transform: scale(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: scale(1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Random motivational quotes rotation
+        const quotes = [
+            {
+                text: "The only way to do great work is to love what you do. Stop procrastinating and start leveling up today!",
+                author: "Your Future Self"
+            },
+            {
+                text: "You are only one small positive thought away from a successful day. Now go conquer that to-do list!",
+                author: "Wonder Wisdom"
+            },
+            {
+                text: "Don't watch the clock; do what it does. Keep going... and collect those XP points!",
+                author: "Legend of Discipline"
+            },
+            {
+                text: "The secret to getting ahead is getting started. Your next achievement is just one click away!",
+                author: "Progress Guru"
+            }
+        ];
+
+        function rotateQuote() {
+            const quote = quotes[Math.floor(Math.random() * quotes.length)];
+            const quoteText = document.querySelector('.quote-text');
+            const quoteAuthor = document.querySelector('.quote-author');
+            
+            if (quoteText && quoteAuthor) {
+                quoteText.style.opacity = '0';
+                quoteAuthor.style.opacity = '0';
+                
+                setTimeout(() => {
+                    quoteText.textContent = quote.text;
+                    quoteAuthor.textContent = `— ${quote.author}`;
+                    quoteText.style.opacity = '1';
+                    quoteAuthor.style.opacity = '1';
+                }, 300);
+            }
+        }
+
+        // Change quote every 10 seconds
+        setInterval(rotateQuote, 10000);
+    </script>
+</body>
+</html>
