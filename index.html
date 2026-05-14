@@ -134,6 +134,32 @@
             letter-spacing: 1px;
         }
 
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+            font-size: 0.95rem;
+            letter-spacing: 0.8px;
+        }
+
+        .nav-menu a {
+            color: #b0e0ff;
+            text-decoration: none;
+            padding: 12px 18px;
+            border: 1px solid rgba(176, 224, 255, 0.35);
+            border-radius: 999px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-menu a:hover {
+            color: #ffffff;
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.12);
+        }
+
         /* Level Up Progress */
         .level-up-section {
             background: rgba(255, 0, 255, 0.1);
@@ -627,16 +653,22 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container">
+    <div class="container" id="top">
         <!-- Header -->
         <div class="header">
             <h1 class="logo">✨ WONDER DISCIPLINE ✨</h1>
             <p class="subtitle">Transform Your Productivity Into Magic</p>
+            <div class="nav-menu">
+                <a href="#top">Domů</a>
+                <a href="#daily-quests">Úkoly</a>
+                <a href="#achievement-islands">Ostrovy</a>
+                <a href="#level-up">Statistiky</a>
+            </div>
             <p style="margin-top: 20px; color: #b0e0ff; font-size: 1rem; line-height: 1.6;">Vstupte do světa, kde každý krok vpřed přináší silnější disciplínu a větší radost z výsledků.</p>
         </div>
 
         <!-- Level Up Your Discipline -->
-        <div class="level-up-section">
+        <div class="level-up-section" id="level-up">
             <div style="display: flex; align-items: center; margin-bottom: 20px;">
                 <span class="level-number">LEVEL 15</span>
                 <div class="level-title">Level Up Your Discipline!</div>
@@ -653,7 +685,7 @@
         </div>
 
         <!-- Daily Quests Section -->
-        <div class="quests-section">
+        <div class="quests-section" id="daily-quests">
             <h2 class="section-title">
                 <span class="icon-emoji">⚔️</span>
                 Daily Quests
@@ -695,7 +727,7 @@
         </div>
 
         <!-- Floating Islands Section -->
-        <div>
+        <div id="achievement-islands">
             <h2 class="section-title">
                 <span class="icon-emoji">🏝️</span>
                 Achievement Islands
